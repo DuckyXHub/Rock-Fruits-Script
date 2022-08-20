@@ -1,47 +1,92 @@
 local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
-local Win = DiscordLib:Window("Ducky Hub")
+local Win = DiscordLib:Window("Ducky Hub VIP++")
 local TabG = Win:Server("Main", "")
 
-
-local CH1 = TabG:Channel("Auto Kill")
-
-
-PlySelect = {}
-
-
-for i,v in pairs(game:GetService("Players"):GetChildren()) do
-    table.insert(PlySelect,v.Name)
+if not game.Workspace:FindFirstChild("Ducky Hub Number 1") then
+    local Part = Instance.new("Part",game.Workspace)
+    Part.Anchored = true
+    Part.CanCollide = true
+    Part.Name = "Ducky Hub Number 1"
+    Part.CFrame = CFrame.new(-1534.46497, 20714.7207, 10637.9971, 0.999460995, -0.00225382787, 0.0327517428, 8.38672953e-09, 0.99764061, 0.0686528906, -0.032829199, -0.0686158836, 0.997102857)
+    Part.Transparency = 0.7
+    Part.Size = Vector3.new(30,1,30)
 end
 
 
-local DA = CH1:Dropdown("Player Select", PlySelect, function(PPlayerP)
-    AutoPlayer = PPlayerP
+local CH1 = TabG:Channel("Auto Fram")
+  
+  
+CH1:Toggle("Auto Lvl" , false, function(AutoLvl)
+    _G.AutoLvl = AutoLvl
+end)
+  
+   
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoLvl == true then
+                if not game.Players.LocalPlayer.Backpack:FindFirstChild("Candy 50000000 Exp") then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Ducky Hub Number 1"].CFrame * CFrame.new(0,3.5,0)
+                    game:GetService("ReplicatedStorage").Inventory:FireServer("Change","Candy 50000000 Exp","Inv")
+                elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Candy 50000000 Exp") then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Ducky Hub Number 1"].CFrame * CFrame.new(0,3.5,0)
+                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChild("Candy 50000000 Exp"))
+                    game:GetService("VirtualUser"):CaptureController()
+                    game:GetService("VirtualUser"):Button1Down(Vector2.new(0 ,0))
+                end
+            end
+        end)
+    end
 end)
 
 
-CH1:Textbox("Add Players" , "Name" ,  true, function(AB)
-    DA:Add(AB)
+CH1:Toggle("Auto Money" , false, function(AutoMoney)
+    _G.AutoBeli = AutoMoney
 end)
 
 
-CH1:Button("TP" ,function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[AutoPlayer].Character.HumanoidRootPart.CFrame
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoBeli == true then
+                if not game.Players.LocalPlayer.Backpack:FindFirstChild("Money") then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Ducky Hub Number 1"].CFrame * CFrame.new(0,3.5,0)
+                    game:GetService("ReplicatedStorage").Inventory:FireServer("Change","Money","Inv")
+                elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Money") then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace["Ducky Hub Number 1"].CFrame * CFrame.new(0,3.5,0)
+                    fireclickdetector(game:GetService("Workspace")["Money pls"].HumanoidRootPart.ClickDetector)
+                    game:GetService("VirtualUser"):CaptureController()
+                    game:GetService("VirtualUser"):Button1Down(Vector2.new(0 ,0))
+                end
+            end
+        end)
+    end
 end)
 
 
-CH1:Toggle("Auto Teleport" , false, function(AutoKill)
-    _G.AutoKillP = AutoKill
+local CH2 = TabG:Channel("Spawn Fruits")
+
+
+CH2:Dropdown("Player Select", {"","","","","","","","","","","","","","","",}, function(PFruitsP)
+    _G.FruitName = PFruitsP
+end)
+
+
+
+CH2:Button("TP" ,function()
+    
+end)
+
+
+CH2:Toggle("Auto Teleport" , false, function(LSPAWN)
+    _G.LoopSpawnDuckyX = LSPAWN
 end)
 
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.AutoKillP then
-                if game.Workspace.Living[AutoPlayer].Humanoid.Health > 0 then
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[AutoPlayer].Character.HumanoidRootPart.CFrame * CFrame.new(0,0,6)
-                elseif not game.Workspace.Living[AutoPlayer].Humanoid.Health > 0 then
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(67.2368774, 16.3280182, -301.541565, -0.999914885, 2.30978383e-08, -0.0130472425, 2.31484591e-08, 1, -3.728859e-09, 0.0130472425, -4.03056477e-09, -0.999914885)
-                end
+            if _G.LoopSpawnDuckyX then
+                game:GetService("ReplicatedStorage").Inventory:FireServer("Change",_G.FruitName,"Inv")
             end
         end)
     end
